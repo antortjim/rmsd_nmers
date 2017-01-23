@@ -1,0 +1,415 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Sectioned Essay
+% LaTeX Template
+% Version 1.0 (3/8/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original Author:
+% Nicolas Diaz (nsdiaz@uc.cl) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{subfigure}
+\usepackage[spanish]{babel}
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+
+
+
+\usepackage{url} % para que aparezcan las url de las paginas web. En el archivo bib hay que poner howpublished = "\url{URL del recurso}"
+\usepackage[nottoc,numbib]{tocbibind} % para que la bibliografia aparezca en la tabla de contenidos (toc) numerada adecuadamente (numbib)
+\usepackage{listings} % para introducir codigo bonito
+\usepackage{textcomp} % hace falta para poner apostrofe ' -.-''''''''
+\usepackage{gensymb} % para que \degree introduzca el simbolo º
+\usepackage[hidelinks]{hyperref} %clickable index
+\hypersetup{
+    colorlinks=false, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+%    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+\usepackage[export]{adjustbox} % Para generar bordes negros en las figuras
+
+%\definecolor{black}{rgb}{0,0,0} % Example color definition, the color can be used with the \color{name} command
+%\definecolor{red}{rgb}{1,0,0} % Example color definition, the color can be used with the \color{name} command
+
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{50pt} % Some vertical space between the title and author name
+
+{\large\@author} % Author name
+\\\@date % Date
+
+\vspace{40pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Análisis ómicos: ChIP-seq y \\ transcriptómica \textit{de novo}}\\ % Title
+Bioinformática y Análisis Genómico} % Subtitle
+
+\author{\textsc{Antonio Ortega Jim\'enez} % Author
+\\{\textit{Universidad de Sevilla}}} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+\thispagestyle{empty}
+
+\vspace{-3.7cm}
+\begin{figure}[!h]
+\includegraphics[scale=0.35]{figures/logoUS}
+\end{figure}
+
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.28,frame]{figures/portada_1}% tight frame
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.12]{figures/sonrisa}
+\end{center}
+\end{figure}
+
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	INDICE
+%----------------------------------------------------------------------------------------
+
+\setcounter{figure}{0}
+\renewcommand\thefigure{\arabic{figure}}
+\renewcommand{\figurename}{\textbf{Figura}}
+
+\setcounter{table}{0}
+\renewcommand\thetable{\arabic{table}}
+\renewcommand{\tablename}{\textbf{Tabla}}
+
+\thispagestyle{empty}
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT AND KEYWORDS
+%----------------------------------------------------------------------------------------
+
+
+%\renewcommand{\abstractname}{Resumen} % Uncomment to change the name of the abstract to something else
+
+
+%\begin{abstract}
+%%hay que repasarlo
+%Se desarrollaron diversos experimentos con el fin de profundizar en los m\'etodos de producci\'on y control de calidad en la industria alimentaria.
+%El an\'alisis del gluten en los alimentos es de inter\'es debido a la problem\'atica de los cel\'iacos. Como prueba de concepto se midi\'o de forma semicuantitativa la presencia de gluten en galletas del supermercado El Jam\'on. Uno de los principales alicientes de los zumos de fruta es la riqueza en vitamina C, un nutriente esencial. Por ello, se valor\'o la concentraci\'on de ascorbato (vitamina C) en zumos de la marca Juver. Los yogures son uno de los productos l\'acteos m\'as conocidos, debido al aporte de probi\'oticos que supone. A partir de in\'oculos de diferentes yogures comerciales elaboramos m\'as yogur y durante el proceso, se sigui\'o el descenso del pH de la leche, un indicador de la evouci\'on de la fermentaci\'on. Tratamos de aislar los microorganismos responsables con medios selectivos est\'andar. Por \'ultimo, se registr\'o  la fermentaci\'on de la harina comercial debida a diferentes cepas de levadura.
+%\end{abstract}
+
+\vspace{30pt} % Some vertical space between the abstract and first section
+
+%----------------------------------------------------------------------------------------
+%	ESSAY BODY
+%----------------------------------------------------------------------------------------
+
+\setcounter{page}{1}
+\section{Predicci\'on \textit{in silico} de interacción entre 2 FTs: PIF1 y PIF4}
+
+\subsection{Antecedentes}
+
+\textit{Arabidopsis thaliana} es la planta modelo más utilizada en estudios de fisiología vegetal debido a su rápido crecimiento y adaptación a las exigencias del laboratorio. El conocimiento del funcionamiento de los organismos vegetales puede permitir aumentar los rendimientos de la agricultura para enfrentarla a los desafíos actuales. Por ello, resulta de interés la investigación en este campo.
+
+Uno de los procesos de interés es la transición entre crecimiento en oscuridad y luz. En oscuridad, una planta recientemente germinada necesita crecer rápidamente en busca de una fuente de luz que le permita iniciar la fotosíntesis. Este rápido desarrollo se consigue con las reservas de la semilla, que por otro lado, son limitadas. La recepción de energía lumínica en la planta activa el cambio en el metabolismo, que pasa de ser escotomorfogénico (heterotrófico) a fotomorfogénico (autótrofo).
+
+Una de las principales familias de factores de transcripción responsables del crecimiento en oscuridad son los \textbf{PIFs}(\textbf{Phytocrome Interacting Factors}), que se inhiben en respuesta a luz. Así, diversos estudios han demostrado la capacidad de estas proteínas para activar genes de desarrollo escotomorfogénico. Asimismo, se ha comprobado que la recepción de luz roja en el fitocromo desencadena un cambio conformacional que activa una función fosfatasa capaz de marcar a los PIFs para su degradación. Por tanto, los PIFs son degradados en respuesta a luz. \cite{plants}
+
+En este trabajo se investiga la posibilidad de la existencia de una interacción funcional entre las proteínas PIF1 y PIF4, que pudiera activar dianas comunes a ambos FTs. Una interacción similar ya se ha demostrado entre PIF3 y PIF4 \cite{Orchard2014}. 
+
+\subsection{Materiales y Métodos}
+
+\subsubsection{Datos utilizados}
+
+Se empleó el dataset de secuenciación masiva proveniente de ChIP-seq y RNA-seq disponible en la base de datos GEO bajo el identificador GSE43286. Estos datos pertenecen al trabajo de Pfeiffer A. \textit{et al} \cite{Pfeiffer2014}.
+
+\begin{itemize}
+
+\item 8 muestras de RNA-seq organizadas en 4 condiciones con 2 réplicas cada una.
+
+ \begin{enumerate}
+ \item WT: todos los PIF activos
+ \item pif1: solo PIF1 está activo
+ \item pif4: solo PIF4 está activo
+ \item quartet: todos los PIF están anulados
+ \end{enumerate}
+
+\item 9 muestras de ChIP-seq organizadas en 3 condiciones con 3 réplicas cada una.
+ \begin{enumerate}
+ \item input: no se selecciona un cistroma específico
+ \item chip-pif1: se selecciona el cistroma de pif1
+ \item chip-pif4: se selecciona el cistroma de pif4
+ \end{enumerate}
+
+\end{itemize}
+
+\subsubsection{Procesamiento de muestras de RNA-seq y ChIP-seq}
+El análisis de RNA-seq se hizo con el protocolo Tuxedo (TopHat, Cufflinks, Cuffmerge, Cuffdiff y CummeRbund) seleccionando genes con un valor absoluto de fold-change > 2 y un p-valor < 0.05. Para analizar muestras de ChIP-seq se utilizaron los programas MACS y PeakAnnotator.
+
+\subsubsection{Análisis de picos de ChIP-seq}
+Para analizar los datos masivos provenientes de plataformas de ChIP-seq se utilizaron diversos paquetes alojados en Bioconductor, un repositorio de software de análisis de datos biológicos en el lenguaje de programación R.
+
+Los paquetes GenomicRanges y IRanges proporcionan el tipo de dato necesario para analizar el cistroma. Los datos de secuenciación se pueden interpretar como intervalos de una secuencia (el genoma), a los cuales se les puede asociar información adicional. Así, estos paquetes proporcionan los GRanges, una estructura de datos diseñada para almacenar intervalos de secuencias y añadirles metadatos de forma eficiente y sencilla.
+
+El paquete ChIPseeker \cite{chipseeker} implementa diversos métodos de análisis que simplifican la integración de los ficheros de picos de más de un factor de transcripción. Facilita la generación de gráficos y la elaboración de análisis estadísticos, además del acceso a otros \textit{datasets}. Para ello se basa en otros paquetes como clusterProfiler, UpSetR y ggplot2. También hace uso de bases de datos de transcritos del formato txdb, accesibles desde Bioconductor.
+
+\subsubsection{Integración con RNA-seq}
+Los picos de ChIP-seq se filtraron con las regiones promotoras de genes expresados diferencialmente entre condiciones de interés. Las 4 condiciones exploradas permiten caracterizar genes que no solo respondan a la unión de uno de los PIFs a su promotor, sino que también a la unión simultánea de ambos. Es decir, nos permiten detectar fenómenos de expresión diferencial que pudieran estar causados por una interacción entre los 2 FTs unidos al mismo promotor. Esta interacción podría ser tanto indirecta (contacto físico) como indirecta.
+
+Esta coincidencia entre a) DEGs por acción de los PIFs y b) solapamiento significativo entre promotores de DEGs y los picos de ChIP-seq, es la base del método implementado para predecir \textit{in silico} una posible interacción.
+
+\subsection{Resultados y discusión}
+
+\subsubsection{El perfil de los picos de PIF1 y PIF4 es similar}
+
+Los estudios exploratorios indican que las dianas de ambos proteínas se encuentran solo unos cientos de bases \textit{upstream} de los TSS (figura \ref{fig:profile} a), lo que confirma sus propiedades de factores de transcripción. Además, el patrón formado en la unión a las regiones promotoras (figura \ref{fig:profile} b) es muy parecido, lo que proporciona evidencias de una posible actuación en común.
+
+\begin{figure}[!h]
+\subfigure[Frecuencia de picos a lo largo de promotores]{\includegraphics[scale=0.30]{figures/count_profile.png}}
+\subfigure[Mapas de calor]{\includegraphics[scale=0.40]{figures/heatmap_profile.png}}
+\caption{Perfil de unión de PIF1 y PIF4 a las regiones promotoras. El sombreado muestra el intervalo de confianza al 95\%, determinado por bootstrap. El heatmap genera una "huella" que caracteriza la unión de ambos FTs a sus promotores diana.}
+\label{fig:profile}
+\end{figure}
+
+Desde el punto de vista funcional, tampoco se revelan grandes diferencias, teniendo ambos FTs una gran preferencia por regiones promotoras a menos de 1 kb del TSS (figura \ref{fig:anotacion}).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.30]{figures/annotation_bars}
+\caption{Anotación funcional de las dianas de PIF1 y PIF4. En la mayor parte de los casos las dianas se encuentran en las regiones promotoras.}
+\label{fig:anotacion}
+\end{figure}
+
+\subsubsection{El análisis estadístico indica que ambos FTs comparten dianas de forma significativa}
+
+Para concluir el análisis exploratorio, implementamos un contraste de hipótesis que evalúa la significancia del solapamiento entre las dianas de ambos.
+
+$H_0$: Los ficheros de picos no solapan de manera significativa, todo solapamiento hallado es por puro azar
+
+$H_1$: El solapamiento es muy fuerte y probablemente no es aleatorio, sino que es originado por una causa subyacente.
+
+\begin{table}[!h]
+\centering
+\caption{Análisis estadístico del solapamiento entre los ficheros de picos de PIF1 y PIF4}
+\label{table:peak-overlap-table}
+\begin{tabular}{c c c c c c}
+	Query & Target & Query length & Target length & N Overlap & p-value \\ \hline
+	PIF1  & PIF4   & 2539         & 1806          & 1194      & 0.0005
+\end{tabular}
+\end{table}
+
+Por tanto, podemos descartar la hipótesis nula con alto nivel de significancia. Los dos factores actúan en las mismas dianas.
+
+\subsubsection{Se registraron 42 genes activados a lo largo de los 4 contrastes implementados}
+
+Los contrastes implementados generaron listas de genes activados con la unión de PIF1 o PIF4 y también con la unión simultánea de ambos. Los 42 genes hallados en común en las 4 listas se consideraron candidatos para filtrar sus promotores con los picos procedentes de ChIP-seq.
+
+\begin{figure}[!h]
+\centering
+\label{fig:venn}
+\includegraphics[scale=0.15]{figures/progressive_activation}
+\caption{Diagrama de Venn de las cuatro condiciones exploradas. 42 genes que suponen el 2.3\% del total se observan en el cruce central \cite{venny}.}
+\end{figure}
+
+\subsubsection{3 de ellos solapan sus regiones promotoras con los picos de los PIFs}
+
+Finalmente, 3 de estos genes resultaron solapar con los picos de unión de los factores de transcripción PIF1 y PIF4. Estos genes son:
+
+\begin{itemize}
+\item AT1G02340 (\textit{hfr1})
+\item AT1G77330 (ACC oxidasa)
+\item AT5G51210 (\textit{ol3})
+\end{itemize}
+
+\textit{hfr1} es, sorprendentemente, un gen fotomorfogénico, del cual se sabe que interacciona con PIF4 impidiendo su unión al DNA. Por tanto, existe una relación compleja entre HFR1 y PIF4 que podría constituir algún tipo de motivo de red. El software IGV \cite{IGV} nos permite visualizar el entorno genómico de \textit{hfr1} (figura \ref{fig:hfr1_igv}).  Por otro lado, la ACC oxidasa es una de las enzimas clave, junto a la ACC sintasa, en la ruta de biosíntesis de etileno. Esta hormona vegetal participa en el crecimiento vegetal, lo que apoya el papel regulador del crecimiento de los PIFs. Más estudios serían necesarios para entender esa relación. Finalmente \textit{ol3} es un gen que estabiliza los oleosomas de la semilla. \cite{uniprot}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.28,frame]{figures/hfr1_intervalos_2}% tight frame
+\end{center}
+\caption[Entorno genómico de HFR1]{Encontramos 2 picos de cada FT muy solapantes y menos de 2000 pbs aguas arriba del sitio de inicio de la transcripción (TSS). Además, la expresión de este gen aumenta conforme aumenta el número de FTs de la familia PIF activos presentes en el organismo (\textit{tracks} WT, PIF1on y quartetmutant). Este gen demuestra la acción aditiva de los PIF, y da pie a la hipótesis del complejo.}
+\label{fig:hfr1_igv}
+\end{figure}
+
+
+El análisis estadístico de este solapamiento también permite descartar la hipótesis del azar y efectivamente, habría un solapamiento significativo entre ambos conjuntos de intervalos (tabla \ref{table:peak-deg-overlap-table}). Este resultado apoya la hipótesis de una interacción directa PIF1-PIF4.
+
+Las datos procesados e interpretados certifican que PIF1 y PIF4 comparten ampliamente sus dianas y tienen un efecto aditivo en la regulación génica. La magnitud de este solapamiento es tal que la existencia de interacción entre ambos no se puede descartar.
+
+La realización de otros estudios de predicción \textit{in silico} como \textit{docking} molecular (biología estructural) o búsqueda de motivos enriquecidos (estadística) aportaría más datos complementarios. Una vez se ha evaluado la posibilidad de la interacción, debe validarse en el plano experimental, con técnicas como el doble híbrido en levadura o la resonancia magnética nuclear.
+
+\begin{table}[!h]
+\centering
+\caption{Análisis estadístico del solapamiento entre promotores de genes expresados de forma diferencial y picos de ChIP-seq}
+\label{table:peak-deg-overlap-table}
+\begin{tabular}{c c c c c c}
+	  Query    & Target & Query length & Target length & N Overlap & p-value \\ \hline
+	Promotores & Picos  & 36           & 3151          & 6         & 0.016
+\end{tabular}
+\end{table}
+
+\section{Continuación del protocolo de transcriptómica \textit{de novo}. Análisis de expresión diferencial en 2 muestras de \textit{Xenopus tropicalis}.}
+
+\subsection{Antecedentes}
+
+El desarrollo embrionario es un proceso biológico muy complejo en el que participan una inmensa cantidad de factores, moléculas y estímulos externos que definen y estructuran el cuerpo de los organismos multicelulares como los humanos. Su estudio tiene gran importancia para comprender el fundamento molecular de muchas enfermedades genéticas y ayudar a encontrar una cura o al menos un tratamiento para los pacientes. Por otro lado, al ser un aspecto clave de la vida de los seres vivos, su estudio promete devolver un conocimiento poderoso que podría revolucionar la evolución tal y como la conocemos.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.8,frame]{figures/dev-stages}
+\end{center}
+\caption{Estadios del desarrollo de \textit{X. tropicalis} explorados en el trabajo publicado \cite{Tan2013}. En el presente trabajo se analizó una muestra de cada fase marcada.}
+\label{fig:stages}
+\end{figure}
+
+En la tarea de transcriptómica \textit{de novo} realizamos el ensamblaje del transcriptoma de 2 muestras de huevos de \textit{Xenopus tropicalis}, un organismo modelo para el desarrollo, en 2 fases larvarias distintas (figura \ref{fig:stages}). Se controló la calidad del ensamblaje de Trinity y se detectaron los \textit{clusters} de ortólogos presentes en las muestras, pero restó realizar una análisis de expresión diferencial de los transcritos. De esta manera, se podría determinar cuáles son aquellos transcritos que están expresados de forma diferencial e intentar trazarlos a los genes que los originan y así trazar redes de coexpresión génica y patrones de expresión que caractericen el desarrollo en \textit{X. tropicalis}. Siendo este un organismo vertebrado, esperamos que exista gran número de ortólogos con \textit{Homo sapiens} para poder correlacionar este conocimiento a nuestra especie.
+
+\subsection{Materiales y métodos}
+
+\subsubsection{Datos utilizados}
+
+Los datos utilizados en esta prueba de concepto corresponden a los aportados en el trabajo de Tan. M \textit{et al} \cite{Tan2013}, un estudio del transcriptoma de \textit{X. tropicalis} a lo largo de varias etapas del desarrollo embrionario, desde la puesta de huevos hasta el estadío de renacuajo. En concreto, se hizo uso de las muestras GSM919938 y GSM919961 (figura \ref{fig:stages}) recogidas en el dataset con el accession number GSE37452 en la base de datos GEO del NCBI. Se utilizaron el mínimo número de muestras y condiciones (sin réplicas) para minimizar el gasto computacional y facilitar esta prueba de concepto.
+
+\subsubsection{Análisis matemático-computacional: edgeR}
+
+El genoma de este organismo ha sido secuenciado, pero aún se encuentra incompleto, de forma que un análisis \textit{de novo} aporta información que se perdería con un alineamiento a dicha referencia. Por ejemplo, todos aquellos transcritos que sean codificados por \textit{locus} que no estuviesen dentro del ensamblado público se ignorarían.
+
+El software utilizado para realizar el análisis es el propuesto para el pipeline de análisis basado en Trinity \cite{Trinity}, que hace uso del paquete de Bioconductor edgeR \cite{edgeR}. Bioconductor es un repositorio de paquetes para el lenguaje de programación R, especializado en el análisis de datos de origen biológico.
+
+El protocolo arrancó con la matriz de cuantificación de transcritos que generó el software RSEM a partir de las lecturas, en formato .fastq, y el ensamblado Trinity.fasta. Se realizó el contraste entre las dos muestras y se determinaron diversos parámetros estadísticos que describen el comportamiento de cada transcrito.
+
+A continuación, se seleccionaron aquellos que cumplieron el criterio de expresión diferencial, fijado en un fold change > 2 y un p-valor < 0.001. El p-valor se estima aplicando métodos de máxima verosimilitud condicional ajustados a cuantiles (qCML) y el test exacto de Fisher.
+
+Los transcritos con mayor carácter diferencial se corrieron contra BLAST para determinar por homología de secuencia su identidad y así adquirir una interpretación biológica de los datos.
+
+Finalmente, se realizó una extracción de \textit{clusters} de genes que tuvieron un patrón de expresión similar a lo largo de las condiciones. Al solo haber 2 condiciones, solo habrán 2 patrones posibles, de ahí que en este caso, esa información no sea de relevancia.
+
+\subsection{Resultados y discusión}
+
+\subsubsection{Miles de genes cambian significativamente su expresión desde el estadío de 2 células hasta la organogénesis}
+Se detectaron 10603 transcritos expresados diferencialmente. De ellos, 2981 tuvieron una expresión significativamente mayor en la fase de estadío de 2 células, mientras que el número hallado en la fase embrionaria fue de 7622. Esta gran diferencia se puede entender a la luz de la mucha mayor complejidad de procesos y regulación genética presentes en un embrión en desarrollo.
+
+La tasa de expresión diferencial se situó en el 13.67 \% del total de transcritos ensamblados por Trinity.
+
+
+\subsubsection{Anotación funcional de genes expresados diferencialmente}
+La representación gráfica de la selección de genes expresados de forma diferencial (DEGs) es el volcano plot (figura \ref{fig:volcano}).
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.57]{figures/volcano}% tight frame
+\end{center}
+\caption[Volcano plot]{Volcano plot de la expresión diferencial de los transcritos de Trinity en el contraste 2 células vs Organogénesis. Cada punto representa un transcrito (contig de Trinity). El eje Y representa la significancia estadística, mientras que el eje X representa el fold change, en ambos sentidos. \textcolor{red}{Rojo:} expresado diferencialmente. \textbf{Negro:} no expresado diferencialmente.}
+\label{fig:volcano}
+\end{figure}
+
+Se observó el clásico patrón de dispersión. La mayoría de los transcritos se concentraron en la zona no diferencial de bajo fold change y p valor no significativo, mientras que una cierta cantidad se situó en la zona diferencial. Además, se visualiza que, a mayor fold change, mayor significancia estadística.
+
+
+Algunos de los transcritos destacables son los determinados por BLAST como correspondientes a \textit{foxh1}, \textit{actc1} y \textit{col2a1}.
+
+\begin{enumerate}
+\item \textit{foxh1}: Se trata de un factor de transcripción que responde a inducción por TGF-$\beta$ formando el complejo ARF1 con las proteínas smad2 y smad4 \cite{uniprot}. Por tanto, se encuentra dentro de una de las rutas metabólicas que KAAS detectó como activas en el análisis de ortólogos realizado en otro trabajo anterior. Se expresó con mayor intensidad en la fase de 2 células, lo que indica su papel clave en el diseño más básico del cuerpo.
+
+\item \textit{col2a1}: Codifica el colágeno de tipo II, específico de tejido cartilaginoso. Este tejido es fundamental en el desarrollo del embrión \cite{uniprot}, pues es el responsable de aportar el soporte estructural en el que se empiezan a formar los órganos en la organogénesis. Así, sería un gen clave del proceso, pues su pico de expresión se produjo en esta fase. La acondroplasia, un síndrome de origen genético que genera enanismo, se debe a la formación de tejido óseo temprana durante el desarrollo, lo que frena el crecimiento lineal del individuo. La investigación en este tipo de genes del desarrollo podría generar conocimiento útil en el  tratamiento o la cura de esta y otras enfermedades.
+
+\item \textit{actc1}: Codifica actina, una de las proteínas, junto a la miosina, responsables de generar las fibras musculares. También se expresó con mayor intensidad en la fase de organogénesis.
+\end{enumerate}
+
+En conclusión, este tipo de análisis permite caracterizar los picos de expresión de diversos transcritos (genes) a lo largo de las condiciones exploradas, lo que permite atribuirles una función biológica determinada y permite orientar la validación experimental en el laboratorio.
+
+\subsubsection{El estadístico E90N50 refina el N50}
+
+La figura \ref{fig:volcano} nos muestra una cantidad de transcritos significativa que se agrupan en torno a una banda en la periferia del gráfico. El análisis de la matriz de cuantificación de transcritos producido por RSEM reveló que el factor diferenciador de estos transcritos es su completa ausencia en una de las 2 condiciones ensayadas. Es decir, RSEM no pudo procesar los archivos de lectura para cuantificar todos los transcritos de Trinity en todas las condiciones.
+
+El que un transcrito fuese cuantificado en una condición pero no en la otra lo convierte automáticamente en DE según nuestro criterio de selección. En cualquier caso, el hecho de que no pudiese ser cuantificado en una de las condiciones refleja su baja expresión, por lo que no sería erróneo considerarlo DE. En resumen, estos transcritos no alcanzaron el umbral mínimo de expresión en una de las condiciones, pero a pesar de tener una distribución anormal, este fenómeno no da pie a interpretaciones erróneas.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.40]{figures/longitud_diferencial}
+\end{center}
+\caption[Distribución de la longitud de los transcritos]{Distribución de la longitud de los transcritos. Conforme aumentamos el número de muestras en las que se cuantifican los transcritos, la distribución de longitudes se hace más grande.}
+\label{fig:cortos}
+\end{figure}
+
+
+Por otro lado, es de esperar que al igual que hubo transcritos que no se cuantificaron en una de las condiciones, también los hubiese que no se cuantificaron en ninguna de las dos. Efectivamente, 17107 tuvieron una cuantificación nula en ambas condiciones.  Probablemente, son transcritos mal ensamblados que Trinity no pudo concatenar en el mismo grafo De Bruijn en el proceso de ensamblado. Este fenómeno viene a confirmar la ventaja del estadístico E90N50 frente al E100N50 (N50) como refinador de la mediana de la distribución de longitud de los transcritos.
+
+La información de estos transcritos no puede analizarse. Para recuperarla, necesitaríamos bien mayor profundidad de secuenciación, o bien mejores métodos computacionales de cuantificación.
+
+En conclusión, los transcritos con menor expresión son más difíciles de procesar en el análisis de transcriptómica \textit{de novo} y esto causa que Trinity no los ensamble adecuadamente, lo que genera un exceso de transcritos de menor longitud (realmente formarían parte de la misma molécula, pero no pudieron ser ensamblados completamente). A su vez, a consecuencia de ser registrados como \textit{contigs} de menor tamaño muy poco abundantes, son difíciles de cuantificar, y pueden quedarse fuera del umbral de sensibilidad del software empleado en la cuantificación (RSEM).
+
+Por todo ello, esperamos que conforme aumenta el número de muestras en las que el \textit{contig} de Trinity pudo ser cuantificado por RSEM, aumente su longitud, ya que cuanto más largo sea, más fácil es su cuantificación. El resultado de ese análisis se muestra en la figura \ref{fig:cortos}.
+
+\subsubsection{La caracterización de la dinámica transcripcional permite distinguir grupos de transcritos que correlacionan su expresión}
+
+El resultado de la clusterización de los transcritos se refleja en la figura \ref{fig:clusters}. Este tipo de figuras permite visualizar rápidamente picos de expresión de grupos de genes a lo largo de múltiples condiciones y ayuda a entender el proceso global y a formular hipótesis sobre la función biológica de estos grupos. Sin embargo, debido al carácter simplista de este trabajo, solo se analizaron dos condiciones y el gráfico obtenido no aporta información relevante.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.25]{figures/clusters1}% tight frame
+\end{center}
+\caption[Correlación en la expresión génica]{Patrones de expresión observados a lo largo de las condiciones. Distinguimos 2 \textit{clusters} de genes agrupados según el cambio experimentado con el cambio de estadío del desarrollo.}
+\label{fig:clusters}
+\end{figure}
+
+ Conforme aumentamos el número de condiciones exploradas, este tipo de gráficos se vuelve más y más informativo, siendo la base de la construcción de redes de co-expresión génica.
+
+
+\nocite{hadley2009}
+\nocite{sonrisa}
+
+%%----------------------------------------------------------------------------------------
+%%	BIBLIOGRAPHY
+%%----------------------------------------------------------------------------------------
+%
+\bibliographystyle{unsrt}
+\bibliography{bibliografia}
+%%----------------------------------------------------------------------------------------
+
+\end{document}
