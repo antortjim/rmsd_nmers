@@ -1,4 +1,4 @@
-from user_defined import *
+firom protein_user_defined import *
 #import Bio.PDB.Superimposer as Superimposer
 #import pickle
 from sys import argv
@@ -11,9 +11,10 @@ flen = int(flen)
 print "%d-mers chosen" % flen
 
 out_folder = 'shiny/sb_exam/out/'
+db = '../top/'
 
-my_sequences = parse_sequence('top',)  # Parse sequences (fasta sequence)
-my_structures = parse_structure('top') # Parse chains (CaPPBuild)
+my_sequences = parse_sequence(db,)  # Parse sequences (fasta sequence)
+my_structures = parse_structure(db) # Parse chains (CaPPBuild)
 
 my_sequences = refine_sequences(my_sequences, my_structures)
 #Keep sequences that have a chain counterpart
@@ -78,91 +79,6 @@ for key, value in my_fragments.items():
 handle.close()
 
 
-## Testing the SVD-RMSD algorithm
-#f1 = my_fragments.values()[62][0]
-#X = f1.X
-##print "inicio"
-##print f1.center()
-#f2 = my_fragments.values()[72][0]
-#
-#
-#X = f1.X
-#Y = f2.X
-#print "X and Y at start" # checked that it's the same for superimposers
-#print X
-#print Y
-#
-#X, Yr, U, S = rotate_pair([f1, f2])
-#
-#
-#print "X and Y after centering and rotation"
-#print X
-#print Yr
-#f1.set_X(X)
-#f2.set_X(Yr)
-#
-#print "Is the center now equal?" # checked it's true
-#if np.sum(abs(f1.center() - f2.center()), axis = 1)[0, 0] < 0.1:
-#    print True
-#else:
-#    print f1.X - f2.X
-#    print False
-#
-##print "X and Y after setting to the fragments."
-##print "Should be just the same as above" # checked
-##X = f1.X
-##Y = f2.X 
-##print X
-##print Y
-#
-#
-#
-##MM, UU, SS = rotate_pair([f1, f2])
-##print "Should be identity matrix" checked
-##print UU
-## UU = I proofs my algorithm thinks it can't be reduced
-#
-#rmsd = compute_RMSD([f1, f2], S)
-#
-#X = f1.X
-#Y = f2.X
-#
-#
-##print X
-##print Y
-##
-#print "U"
-#print U
-#print rmsd
-#
-###
-#sup = Superimposer()
-## Specify the atom lists
-## 'fixed' and 'moving' are lists of Atom objects
-## The moving atoms will be put on the fixed atoms
-#fixed = f1.atoms
-#moving = f2.atoms
-##set_atoms(fixed, moving)
-#sup.set_atoms(fixed, moving)
-## Print rotation/translation/rmsd
-#SU, ST = map(np.asmatrix, sup.rotran)
-#Srmsd = sup.rms
-## Apply rotation/translation to the moving atoms
-#sup.apply(moving)
-#
-#f2 = my_fragments.values()[72][0]
-#SYr = np.dot((f2.X + ST), SU)
-#
-#print "SU"
-#print SU
-#print Srmsd
-
-
-# Saving the objects:
-#with open('objs.pickle', 'w') as f:  # Python 3: open(..., 'wb')
-#    pickle.dump([X, Y, SYr, Yr, SU, U], f)
-
-
 
 # Compute rmsd from matching pairs
 my_RMSD = signal(my_fragments)
@@ -172,7 +88,7 @@ l = len(my_RMSD)
 my_rRMSD = random_pairs(my_fragments, l)
 
 
-# Export data
+# Export data to files for R posterior processing
 header = 'f1.seq,f1.seq_id,f1.chain_id,f1.start,f2.seq,f2.seq_id,f2.chain_id,f2.start,rmsd\n'
 handle = open(out_folder + '%d-mers_rmsd.txt' % flen, 'w+')
 

@@ -1,5 +1,11 @@
 from pymol import cmd
 
+# Automation of simple Pymol tasks
+# Takes a picture of the alignment between 2 fragments
+# One fragment coming from s1 (structure 1) in c1 (chain in s1), between residues i1 and i2
+# The other coming from s2 (structure 2) in c2 (chain in s2), between residues j1 and j2
+
+## BUG: Does not remove fragments between the same resi but in chains different from c1/c2
 def show_fragment(s1, s2, c1, i1, i2, c2, j1, j2):
     cmd.load(s1 + ".ent")
     cmd.load(s2 + ".ent")

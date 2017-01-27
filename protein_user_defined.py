@@ -23,6 +23,9 @@ aa_dict = iupac.protein_letters_3to1
 aa_list = map(lambda aa: aa.upper(), aa_dict.keys())
 
 def is_aa(residue):
+    '''Returns True if the supplied residue has resname = one of the
+    regular 20 aa and also has a Calfa atom. Somehow, sometimes the former
+    is not sufficient :/'''
     resname = residue.get_resname()
     return True if resname in aa_list and residue.has_id('CA') else False
     
@@ -59,25 +62,18 @@ def parse_structure(folder):
     # Iterate through my_files and get_structure "foo" from file f
     nstr = 0
     for f in my_files:
-        structure = parser.get_structure(f, "top/" + f)
+        structure = parser.get_structure(f, folder + f)
         my_structures[f] = structure # Store structure with key given by fname
         nstr += 1
-        #c_id = 0
-        #selected_chains = []
-        #for c in structure[0]:
-        #    if check_chain(c, f, c_id):         
-        #        selected_chains.append(c)
-        #    c_id += 1
-        #refined_structure = iter(selected_chains)
-
-        #my_structures[f] = refined_structure # Store structure with key given by fname
 
     print "Parsed %d structures" % nstr
     return my_structures
   
 
 def get_visible_chains(SeqRecord_list, structure):
-
+    '''Learn which of the sequences parsed from SEQRES
+    have coordinate info. The rest will be discarded in
+    following functions'''
     chains = list(structure[0])
     chains_id = []
     for c in chains:
@@ -137,7 +133,7 @@ def parse_sequence(folder):
     # For every file parse the sequences saved in SEQRES field
     # Debug legacy error that puts X after every 13 res
     for f in my_files:
-        handle = open("top/" + f, "rU")
+        handle = open(folder + f, "rU")
         clean_records = []
         for record in SeqIO.parse(handle, "pdb-seqres"):
             #record.seq = clean_seq(record.seq)
@@ -161,21 +157,10 @@ def refine_sequences(my_sequences, my_structures):
     return my_sequences
 
         
-             
-
-def build_polypeptide(s, r):
-    '''Receives structure object and radius.
-    Returns a polypeptide list for the structure object
-    built using CaPPBuilder with radius r'''
-    ppb = CaPPBuilder(radius = r)
-    pp_list = ppb.build_peptides(s, aa_only = 1)
-
-    # Process pp_list so that you get rid of heteroatoms
-    
-    return pp_list
-
 
 def rewrite_seq(seq, my_chain, key):
+    '''Puts and X in the supplied seq if the corresponding residue
+    in my_chain has no coordinate info'''
     #print "Processing sequence in %s" % key
     i = 0 # Iterating throuh letters in seq coming from my_sequences
     j = 0 # Iterating through residues in my_chain
@@ -247,7 +232,8 @@ def integrate_seq_str(my_sequences, my_structures):
 
 
 class Fragment(object):
-
+    '''Defines a new Data type to store information
+    related to n-mers'''
     def __init__(self, seq, start, seq_id, chain_id, X, atoms):
         self.seq = seq
         self.start = start 
@@ -257,25 +243,22 @@ class Fragment(object):
         self.atoms = atoms
 
     def center(self):
-#        if len(self.X) > 1:
-#            print self.X
-#            print type(self.X)
-#            raise Exception("More than 1 matrix for fragment")
         return np.mean(self.X, axis = 0)
 
     def set_X(self, X):
-        #del self.X
         self.X = X
 
     
 def generate_fragments(my_sequences, my_structures, flen):
+    '''Returns a dictionary of fragments (n-mers) indexed by the sequence they exhibit
+    Entries keys are a sequence of n bases, and values are lists of Fragment objects.
+    If list has length > 1, there's a match (at least one)'''
 
     my_fragments = {} # Initialize fragments dictionary
                       # fragment sequences will be used as keys
                       # value will be a list of fragment objects
                       # sharing the same 5 res seq with key
-    acum2 = 0
-    acum3 = 0
+
     nfragments = 0
     for key, value in my_sequences.items():    # for every list of SeqRecords
                                                # in each pdb file
@@ -316,11 +299,12 @@ def generate_fragments(my_sequences, my_structures, flen):
                 acum = 0
                 res_count = 0
                 for r in residues:
-                    if not is_aa(r):
+                    if not is_aa(r): # Checks that the residue is a real aa
+                                     # This should be implement outside of
+                                     # this function... Works anyway
                         reject_f = True 
                         break
                     else:
-                        #print f[0][res_count], r.get_resname() checks that t
                         a = r['CA']
                         atoms.append(a)
                         coords = a.get_coord()
@@ -330,14 +314,10 @@ def generate_fragments(my_sequences, my_structures, flen):
     
                         CA_matrix = np.asmatrix(my_matrix)
                         res_count += 1
+                
                 if reject_f == True:
                     break
-
-                if acum < flen:
-                    #print list(residues)
-                    acum2 += 1
-               
-                acum3 += 1        
+       
                 if CA_matrix.shape == (flen, 3): # in principle it should always 
                                               # at least in the exam
                     fragment = Fragment(f[0], f[1], key,            # Instantiate
@@ -350,12 +330,11 @@ def generate_fragments(my_sequences, my_structures, flen):
 
             k += 1 # move on to next record in value (SR list)
 
-    #print acum2
-    #print acum3
     print "Generated %d fragments" % nfragments
     return my_fragments
 
 
+### SVD + RMSD algorithm
 def focus(f1, f2):
     '''Receives 2 Fragment objects and centers them around 0'''
     f1_center = f1.center()
@@ -382,33 +361,26 @@ def rotate_pair(pair):
     R = Y.T * X # 3 x 5 * 5 x 3 = 3 x 3
 
     V, S, Wt = np.linalg.svd(R)
-
-    #print "R"
-    #print R
-    #print "V"
-    #print V
-    #print "Wt"
-    #print Wt
  
     #Z = np.diag([1, 1, -1])
 
     U = Wt.T * V.T
 
     if np.linalg.det(U) < 0:
-        #print "Reflection catch"
+        # Reflection catch
         Wt[2] = -Wt[2]
         U = Wt.T * V.T
 
     # Rotate Y using U
     Yr = (Y * U.T) # + f1_center  # 5 x 3 * 3 x 3 = 5 x 3
 
-    # Set f1 matrix to orignal place
-    #f1.set_X(f1.X + f1_center)
-
     result = [X, Yr, U.T, S]
     return result
 
 def compute_RMSD(pair, S):
+    '''Computes the minimum RMSD value between a pair of Fragment objects
+    using their coordinates matrices (X attribute), and the S matrix produced
+    during SVD'''
 
     # Received as n x 3
     f1 = pair[0]
@@ -421,50 +393,33 @@ def compute_RMSD(pair, S):
     # Transpose to 3 x 5
     X = X.T
     Y = Y.T
-   
-    #print "Tras pasar por rotate"
-    #print f1.center() 
-    #print f2.center() 
+
 
     n = float(X.shape[1])
 
-#    sq_diff = np.square(X - Y) # 3 x 5
-#
-#    my_sum = np.sum(sq_diff, axis = 0) # suma por columnas
-#                                       # becomes 1 x 5
-#    print my_sum                         
-#    rmsd = np.sqrt(1 / n * my_sum)
-#    RMSD = np.sum(rmsd, axis = 1)[0, 0] # sum all rmsd values
 
     E0 = np.sum(np.square(np.linalg.norm(X, axis = 0)) + np.square(np.linalg.norm(Y, axis = 0)))
-#    print E0
 
     RMSD = np.sqrt((1 / n) * (E0 - 2 * np.sum(S)))
 
     return RMSD
 
 def signal(my_fragments):
-    
+    '''Returns a list of tuples with information about all sequence matches
+    found in fragments. This info includes the shared sequence and the rmsd value'''
     print "Working on fragment matches"
     my_RMSD = []
-    #i = 0
     for key, value in my_fragments.items():
         pairwise_combinations = itertools.combinations(value, 2)
         for c in pairwise_combinations:
             f1 = c[0]
             f2 = c[1]
-    #        before = f2.X
             X, Y, U, S = rotate_pair([f1, f2])
             f1.set_X(X)
             f2.set_X(Y)
-    #        after = f2.X
             RMSD = compute_RMSD([f1, f2], S)
 
-    #        if i < 5:
-    #            print f1.X
-    #            print after
-    #            print RMSD
-    #            i += 1
+
             
             result = (c[0].seq, c[0].seq_id, c[0].chain_id, c[0].start,
                       c[1].seq, c[1].seq_id, c[1].chain_id, c[1].start,
@@ -476,7 +431,7 @@ def signal(my_fragments):
 
 
 def random_pairs(my_fragments, l):
-    
+    '''Analogous to signal(), but pairing is performed at random'''
     print "Generating %d random pairs" % l
     my_RMSD = [] * l
     fragments = []
@@ -485,7 +440,6 @@ def random_pairs(my_fragments, l):
             fragments.append(f)
 
     b = len(fragments) - 1 #  last index in fragments
-    #print b
     i = 0    
     while i < l: # generate as many random pairs as
                  # real matches are available
