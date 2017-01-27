@@ -31,6 +31,7 @@ ggplot(data = bp_probs, aes(x = id, y = p, fill = id)) +
   labs(y = "Probability", x = "Sequence id") +
   guides(fill = FALSE) +
   geom_hline(mapping = aes(yintercept = 0.8), linetype = 2)
+# Exam figure
 ggsave("latex/figures/violin.png", height = 6, width = 10)
 
 

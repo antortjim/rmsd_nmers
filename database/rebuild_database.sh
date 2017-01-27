@@ -1,10 +1,10 @@
 #! /bin/bash
 
 # Are you currently renovating? > $1
-cd top
+cd ../../top
 
 echo "$(ls -1 | wc -l) files already downloaded :)"
-python ../rebuild_database.py
+python scripts/database/rebuild_database.py
 
 mv obsolete/*/* .
 

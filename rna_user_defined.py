@@ -1,12 +1,12 @@
 import numpy as np
 
 
-def hamming_distance(structure_1, structure_2):
-    
+def hamming_distance(s1, s2):
+    '''Returns hamming distance between s1 and s2'''
     acum = 0 # number of mismatches
-    for i in range(len(structure_1)): # for every position in structure_1
-        if structure_1[i] != structure_2[i]: # if position i in str_1
-                                             # is not equal to str_2[i]
+    for i in range(len(s1)): # for every position in s1
+        if structure_1[i] != s2[i]: # if position i in s1
+                                             # is not equal to s2[i]
             acum += 1                        # sum 1 to acum
 
 
@@ -14,7 +14,18 @@ def hamming_distance(structure_1, structure_2):
     return acum
 
 def check_bifurcation(structure):
-    
+    '''Checks for bifurcations in the dot bracket notation.
+    One bifurcation is represented as a tuple of 2 indices
+    First one states where the bifurcation starts (the first "(")
+    Las ones states where the bifurcation ends (last ")")
+    If there are no bifurcations, the list of tuples has length 1
+    and the indices are those of the first ( and the last ) in the
+    whole structure'''
+
+    # Initialize an acum that will store how many opening parentheresis
+    # remain to be closed
+    # Everytime acum reaches 0 after havin been positive counts
+    # as one bifurcation (the end of one)
     acum = 0
     bifurcation_id = 0
     bifurcations = []
@@ -42,9 +53,14 @@ def check_bifurcation(structure):
         return "Non valid structure. Too many closing base pairs"
 
 def extract_base_pairs(structure):
-    
-    bifurcations = check_bifurcation(structure)
-    base_pairs = []
+    '''Extracts the start and end indices of all giving base pairs
+    in a dot bracket structure'''
+
+    bifurcations = check_bifurcation(structure) # Checks for bifurcation
+                                                # The code below is repeated for every
+                                                # bifurc because they are independent folding units
+                                                # and thus must be processed independtly
+    base_pairs = []                             # Initialize list of tuples (start_id, end_id)
     for b in bifurcations:
         b_start = b[0] 
         b_end = b[1] + 1
@@ -52,11 +68,7 @@ def extract_base_pairs(structure):
         reverse = substring[::-1]
         acum = 0
        
-        #opening = []
-        #opening_rank = []
-        #closing = []
-        #closing_rank = []
-      
+     
         opening = {}
         closing = {}
 
@@ -65,9 +77,6 @@ def extract_base_pairs(structure):
             if c == "(":
                 acum += 1
 
-                #opening.append(idx)
-                #opening_rank.append(acum)
-                
                 try:
                     opening[str(acum)].append(idx)
 
@@ -76,8 +85,6 @@ def extract_base_pairs(structure):
 
             if c == ")":
                 acum -= 1
-                #closing.append(idx)
-                #closing_rank.append(acum + 1)
 
                 try:
                     closing[str(acum + 1)].append(idx)
@@ -98,7 +105,8 @@ def extract_base_pairs(structure):
     return base_pairs
 
 def count_not_shared(list_1, list_2):
-
+    '''Counts which tuples are available in list_1 and not in list_2
+    Input lists are extract_base_pairs output'''
     acum = 0
  
     for l1 in list_1:
@@ -108,10 +116,10 @@ def count_not_shared(list_1, list_2):
     return acum
            
 
-   
-                
+                   
 def bp_distance(structure_1, structure_2):
-
+    '''Returns the bp_distance, computed as the return of count_not_shared
+    in both directions'''
 
     bp1, bp2 = map(extract_base_pairs, [structure_1, structure_2])
 

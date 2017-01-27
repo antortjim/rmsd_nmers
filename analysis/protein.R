@@ -7,8 +7,8 @@ library("dplyr")
 library("cowplot")
 theme_set(theme_bw(base_size = 20))
 flen <- 5
-out_folder = "shiny/sb_exam/out/"
-plot_folder = "plots/"
+out_folder = "../shiny/sb_exam/out/"
+plot_folder = "../..plots/"
 
 # check_intraprotein <- function(my_row) {
 #   if (my_row[2] == my_row[6]) {
@@ -111,6 +111,7 @@ histogram <- plot_grid(A, B, labels = c("A", "B"), nrow = 2, align = "v")
 
 
 fn <- paste(plot_folder, "histogram.png", sep = "")
+# Save exam figure
 save_plot(fn, histogram,
           ncol = 1, # we're saving a grid plot of 1 columns
           nrow = 2, # and 2 rows
@@ -124,11 +125,8 @@ ndDT %>% group_by(pair) %>% summarise(x = sum(rmsd < 2))
 ndDT %>% group_by(pair) %>% summarise(x = sum(rmsd > 2))
 ndDT %>% group_by(pair) %>% summarise(x = median(rmsd))
 ndDT %>% group_by(pair) %>% summarise(x = mean(rmsd))
-
 ndDT %>% group_by(pair) %>% summarise(x = table(pair))
-
 sum(ndDT$pair == "sequence")
-
 ndDT %>% group_by(pair) %>% summarise(x = mean(rmsd))
 
 
@@ -152,8 +150,3 @@ D
 
 wilcox.test(ndDT %>% filter(pair == "random") %>% select(rmsd) %>% .$rmsd,
             ndDT %>% filter(pair == "sequence") %>% select(rmsd) %>% .$rmsd)$p.value
-
-
-
-# amounts <- c(394232, 2602, 266, 74, 55, 45, 38, 33, 29)
-# plot(3:11, log(amounts))

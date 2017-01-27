@@ -2,7 +2,7 @@ import Bio.PDB as PDB
 import time
 
 pdbList = PDB.PDBList()
-pdb_textfn = "../pdb.txt"
+pdb_textfn = "../scripts/database/pdb.txt"
 
 
 with open(pdb_textfn) as pdb_textfile:
