@@ -10,7 +10,7 @@ flen = int(flen)
 
 print "%d-mers chosen" % flen
 
-out_folder = 'shiny/sb_exam/out/'
+out_folder = 'shiny/out/'
 db = '../top/'
 
 my_sequences = parse_sequence(db,)  # Parse sequences (fasta sequence)

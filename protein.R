@@ -7,7 +7,7 @@ library("dplyr")
 library("cowplot")
 theme_set(theme_bw(base_size = 20))
 flen <- 5
-out_folder = "../shiny/sb_exam/out/"
+out_folder = "../shiny/out/"
 plot_folder = "../..plots/"
 
 # check_intraprotein <- function(my_row) {

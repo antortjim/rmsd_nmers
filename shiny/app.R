@@ -7,7 +7,7 @@
 #    http://shiny.rstudio.com/
 #
 
-library(shiny)
+library("shiny")
 
 lower <- 3
 upper <- 20

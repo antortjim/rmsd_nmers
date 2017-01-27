@@ -1,0 +1,10 @@
+name: rmsd_nmers
+title: RMSD_nmers
+account: antortjim
+server: shinyapps.io
+appId: 153443
+bundleId: 692433
+url: https://antortjim.shinyapps.io/rmsd_nmers/
+when: 1485481491.22663
+asMultiple: FALSE
+asStatic: FALSE
