@@ -1,5 +1,14 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Methods}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Build of the top100H}{section.2}% 3
-\BOOKMARK [1][-]{section.3}{Results}{}% 4
-\BOOKMARK [1][-]{section.4}{Discussion}{}% 5
+\BOOKMARK [1][-]{section.2}{Materials and methods}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Structure and sequence parse, and generation of n-mers}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Rebuild of the top100H}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Pairwise computation of RMSD}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Visualization of data}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Results}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{RMSD values distribution for 5-mers}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Proteins under PDB entries 4ptp and 1mct share a domain}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Sequence pairs with high RMSD values adopt opposite conformations}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.4}{Increasing the size of the n-mers promotes the divergence of the sequence pairs distribution}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.5}{Interactive visualization of RMSD distributions}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Conclusions}{}% 13
+\BOOKMARK [1][-]{section.5}{References}{}% 14

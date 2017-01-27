@@ -21,9 +21,41 @@
 \@writefile{toc}{\select@language{english}}
 \@writefile{lof}{\select@language{english}}
 \@writefile{lot}{\select@language{english}}
-\bibstyle{unsrt}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{1}{section.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Build of the top100H}{1}{subsection.2.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{1}{section.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{1}{section.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Materials and methods}{1}{section.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Structure and sequence parse, and generation of n-mers}{1}{subsection.2.1}}
+\citation{bio}
+\citation{top100}
+\citation{pdb}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Rebuild of the top100H}{2}{subsection.2.2}}
+\citation{rmsd}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Pairwise computation of RMSD}{3}{subsection.2.3}}
+\citation{numpy}
+\citation{shiny}
+\citation{ggplot2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Visualization of data}{4}{subsection.2.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{4}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}RMSD values distribution for 5-mers}{4}{subsection.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {5-mers RSMD distribution histograms}. \textbf  {A} If all intraprotein matches and those occuring in structure-sharing proteins are included, an exaggerated count is obtained for low RMSD values. \textbf  {B} If matches from the same protein are discarded, and only the first of those in structure-sharing proteins are taken into account, a more sensible distribution is obtanined. In both cases, a clear trend toward low values is observed in sequence pairs, whereas no particular trend is observed in sequences paired at random. No peak, besides the one at very low RMSD values, was observed.}}{5}{figure.1}}
+\newlabel{fig:hist}{{1}{5}{\textbf {5-mers RSMD distribution histograms}. \textbf {A} If all intraprotein matches and those occuring in structure-sharing proteins are included, an exaggerated count is obtained for low RMSD values. \textbf {B} If matches from the same protein are discarded, and only the first of those in structure-sharing proteins are taken into account, a more sensible distribution is obtanined. In both cases, a clear trend toward low values is observed in sequence pairs, whereas no particular trend is observed in sequences paired at random. No peak, besides the one at very low RMSD values, was observed}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Proteins under PDB entries 4ptp and 1mct share a domain}{5}{subsection.3.2}}
+\newlabel{fig:perfect_match}{{3.2}{6}{Proteins under PDB entries 4ptp and 1mct share a domain}{subsection.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 4ptp and 1mct are highly similar.}}{6}{figure.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Sequence pairs with high RMSD values adopt opposite conformations}{6}{subsection.3.3}}
+\newlabel{fig:high_rmsd}{{3.3}{7}{Sequence pairs with high RMSD values adopt opposite conformations}{subsection.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Even though they share aminoacidic sequence, this pair of 5-mers adopts a totally different fold that leads to an RMSD value of 3.13.}}{7}{figure.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The 7-mers random pairs distribution spreads around a larger interval of RMSD values. The sequence pairs distribution moves toward lower values, while the random pairs become more spread out and move toward larger values. The number of n-mers decreases because matches are less probable.}}{7}{figure.4}}
+\newlabel{fig:7mers}{{4}{7}{The 7-mers random pairs distribution spreads around a larger interval of RMSD values. The sequence pairs distribution moves toward lower values, while the random pairs become more spread out and move toward larger values. The number of n-mers decreases because matches are less probable}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Increasing the size of the n-mers promotes the divergence of the sequence pairs distribution}{7}{subsection.3.4}}
+\bibstyle{unsrt}
+\bibdata{bibliography}
+\bibcite{bio}{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Interactive visualization of RMSD distributions}{8}{subsection.3.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusions}{8}{section.4}}
+\bibcite{top100}{2}
+\bibcite{pdb}{3}
+\bibcite{rmsd}{4}
+\bibcite{numpy}{5}
+\bibcite{shiny}{6}
+\bibcite{ggplot2}{7}
+\@writefile{toc}{\contentsline {section}{\numberline {5}References}{9}{section.5}}

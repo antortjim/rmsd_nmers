@@ -477,7 +477,7 @@ def signal(my_fragments):
 
 def random_pairs(my_fragments, l):
     
-    print "Working on random fragments"
+    print "Generating %d random pairs" % l
     my_RMSD = [] * l
     fragments = []
     for value in my_fragments.values():
@@ -508,32 +508,3 @@ def random_pairs(my_fragments, l):
         my_RMSD.append(result)
         i += 1
     return my_RMSD
-
-
-#def set_atoms(fixed, moving): 
-#    """ 
-#    Put (translate/rotate) the atoms in fixed on the atoms in 
-#    moving, in such a way that the RMSD is minimized. 
-#
-#    @param fixed: list of (fixed) atoms 
-#    @param moving: list of (moving) atoms 
-#    @type fixed,moving: [L{Atom}, L{Atom},...] 
-#    """ 
-#    if not (len(fixed) == len(moving)): 
-#        raise PDBException("Fixed and moving atom lists differ in size") 
-#    l = len(fixed) 
-#    fixed_coord = np.zeros((l, 3)) 
-#    moving_coord = np.zeros((l, 3)) 
-#    for i in range(0, len(fixed)): 
-#        fixed_coord[i] = fixed[i].get_coord() 
-#        moving_coord[i] = moving[i].get_coord() 
-#
-#    print "X and Y that Superimposer uses" 
-#    print fixed_coord
-#    print moving_coord
-#    #sup = SVDSuperimposer() 
-#    #sup.set(fixed_coord, moving_coord) 
-#    #sup.run() 
-#    #rms = sup.get_rms() 
-#    #rotran = sup.get_rotran() 
-#

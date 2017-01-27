@@ -1,6 +1,15 @@
 \select@language {english}
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}
-\contentsline {section}{\numberline {2}Methods}{1}{section.2}
-\contentsline {subsection}{\numberline {2.1}Build of the top100H}{1}{subsection.2.1}
-\contentsline {section}{\numberline {3}Results}{1}{section.3}
-\contentsline {section}{\numberline {4}Discussion}{1}{section.4}
+\contentsline {section}{\numberline {2}Materials and methods}{1}{section.2}
+\contentsline {subsection}{\numberline {2.1}Structure and sequence parse, and generation of n-mers}{1}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Rebuild of the top100H}{2}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Pairwise computation of RMSD}{3}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Visualization of data}{4}{subsection.2.4}
+\contentsline {section}{\numberline {3}Results}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}RMSD values distribution for 5-mers}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Proteins under PDB entries 4ptp and 1mct share a domain}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Sequence pairs with high RMSD values adopt opposite conformations}{6}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Increasing the size of the n-mers promotes the divergence of the sequence pairs distribution}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Interactive visualization of RMSD distributions}{8}{subsection.3.5}
+\contentsline {section}{\numberline {4}Conclusions}{8}{section.4}
+\contentsline {section}{\numberline {5}References}{9}{section.5}
