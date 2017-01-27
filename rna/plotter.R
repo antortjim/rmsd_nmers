@@ -1,12 +1,13 @@
 rm(list = ls())
-setwd("~/MEGA/Master/SB/exam/rna/")
+setwd("/home/antortjim/MEGA/Master/SB/exam/scripts/rna")
 suppressMessages(library("dplyr"))
 library("ggplot2")
 theme_set(theme_bw(base_size = 20))
 
 bp_probs <- data.frame()
 seqs <- character(2)
-
+plot_out <- "../../LaTeX/figures/"
+  
 for(id in 1:2) {
 
  message(paste("Processing sequence", id))
@@ -32,7 +33,7 @@ ggplot(data = bp_probs, aes(x = id, y = p, fill = id)) +
   guides(fill = FALSE) +
   geom_hline(mapping = aes(yintercept = 0.8), linetype = 2)
 # Exam figure
-ggsave("latex/figures/violin.png", height = 6, width = 10)
+ggsave(paste(plot_out, "violin.png", sep = ""), height = 6, width = 10)
 
 
 ggplot(data = bp_probs, aes(x = id, y = p, col = id)) +
@@ -40,7 +41,7 @@ ggplot(data = bp_probs, aes(x = id, y = p, col = id)) +
   labs(y = "Probability", x = "Sequence id") +
   guides(col = FALSE) +
   geom_hline(mapping = aes(yintercept = 0.8), linetype = 2)
-ggsave("latex/figures/jitter.png", height = 6, width = 10)
+ggsave(paste(plot_out, "jitter.png", sep = ""), height = 6, width = 10)
 
 ggplot(data = bp_probs) +
   stat_ecdf(aes(x = p, col = id)) +
@@ -48,7 +49,7 @@ ggplot(data = bp_probs) +
   scale_color_discrete(name = "Sequence",
                       breaks = c(1, 2),
                       labels = c("Seq1", "Seq2"))
-ggsave("latex/figures/rank_plot.png", height = 6, width = 10)
+ggsave(paste(plot_out, "rank_plot.png", sep = ""), height = 6, width = 10)
 
 g80 <- bp_probs %>% arrange(-p) %>% summarize(g80 = sum(p > 0.8))
 
