@@ -1,4 +1,4 @@
-firom protein_user_defined import *
+from protein_user_defined import *
 #import Bio.PDB.Superimposer as Superimposer
 #import pickle
 from sys import argv
@@ -10,8 +10,8 @@ flen = int(flen)
 
 print "%d-mers chosen" % flen
 
-out_folder = 'shiny/out/'
-db = '../top/'
+out_folder = '../shiny/out/'
+db = '../../top/'
 
 my_sequences = parse_sequence(db,)  # Parse sequences (fasta sequence)
 my_structures = parse_structure(db) # Parse chains (CaPPBuild)
