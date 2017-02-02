@@ -17,9 +17,22 @@ To run the code in the protein part:
 
 Leave your dataset of pdb files into a folder called **top**.
 
-The folder containing the cloned repo should be in the same folder as top
+The folder containing the cloned repo should be in the same folder as top:
+.
+├── **structural_bioinformatics**
+│   ├── database
+│   ├── protein
+│   ├── README.md
+│   ├── rna
+│   └── shiny
+└── **top**
+    ├── *PDB File 1*
+    ├── *PDB File 2*
+    ├── ...
+    
 
-Run
+
+**Run**
 
 ``FLEN=5 # set to the desired n-mer (fragment) length``
 
