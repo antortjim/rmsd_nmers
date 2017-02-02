@@ -1,1 +1,3 @@
-shiny/out/*
+shiny/out/*.csv
+shiny/out/*.txt
+shiny/out/**/*
